@@ -23,9 +23,21 @@ export const commonErrorMessages = () => {
     return "This field must contain letters and numbers only";
   };
 
-  const containSpecialCharacters = () : string => {
-    return 'This field must contain special characters'
-  }
+  const containSpecialCharacters = (): string => {
+    return "This field must contain special characters";
+  };
+
+  const lowerCase = (): string => {
+    return "This string must be in lower case";
+  };
+
+  const upperCase = (): string => {
+    return "This string must be in upper case";
+  };
+
+  const bothCasesRequired = (): string => {
+    return "This string must contain both upper and lower cases";
+  };
 
   return {
     maxLength,
@@ -34,6 +46,9 @@ export const commonErrorMessages = () => {
     lettersOnly,
     numbersOnly,
     lettersAndNumbersOnly,
-    containSpecialCharacters
+    containSpecialCharacters,
+    lowerCase,
+    upperCase,
+    bothCasesRequired
   };
 };
