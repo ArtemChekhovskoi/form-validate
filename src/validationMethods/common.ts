@@ -6,6 +6,7 @@ import {
 import { isNotBothCases } from "./utils/case/isNotBothCases";
 import { isNotOnlyLowerCase } from "./utils/case/isNotOnlyLowercase";
 import { isNotOnlyUppercase } from "./utils/case/isNotOnlyUppercase";
+import { isEmail } from "./utils/email/isEmail";
 import { isLessThenMinLength } from "./utils/length/isLessThenMinLength";
 import { isMoreThenMaxLength } from "./utils/length/isMoreThenMaxLength";
 import { isNotContainSpecialCharacters } from "./utils/lettersAndNumbers/isNotContainSpecialCharacters";
@@ -70,7 +71,13 @@ export const validateCommonString = (
         if (settings.case === "both required") {
           isNotBothCases(value) &&
             errorsMessages.push(validationErrors.common.bothCasesRequired());
+          break;
         }
+      case "isEmail":
+        !isEmail(value) &&
+          errorsMessages.push(validationErrors.common.notEmail());
+        break;
+
       default:
         return { errors: null };
     }

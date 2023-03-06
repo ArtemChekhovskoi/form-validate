@@ -131,6 +131,77 @@ describe("Common validatation", () => {
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
+  describe("case sensative validation", () => {
+    const lowerCaseSettings: CommonValidationSettings = {
+      case: "lower",
+    };
+    const upperCaseSettings: CommonValidationSettings = {
+      case: "upper",
+    };
+    const bothCaseSettings: CommonValidationSettings = {
+      case: "both required",
+    };
+    it("return error if upper case persists", () => {
+      const { errors } = validate.common("qweRt 12f!", lowerCaseSettings);
+      Array.isArray(errors) &&
+        expect(errors).toBe(validationErrors.common.lowerCase());
+    });
+    it("shouldn't return error if there's only lower case", () => {
+      const { errors } = validate.common("hello 1!", lowerCaseSettings);
+      Array.isArray(errors) && expect(errors).toBeNull();
+    });
+    it("return error if lower case persists", () => {
+      const result1 = validate.common("QWErT", upperCaseSettings);
+      Array.isArray(result1.errors) &&
+        expect(result1.errors[0]).toBe(validationErrors.common.upperCase());
+    });
+    it("shouldn't return error if there's only upper case", () => {
+      const { errors } = validate.common("QWERT", upperCaseSettings);
+      Array.isArray(errors) && expect(errors).toBeNull();
+    });
+    it("return error if not both cases persists", () => {
+      const result1 = validate.common("qwet", bothCaseSettings);
+      Array.isArray(result1.errors) &&
+        expect(result1.errors[0]).toBe(
+          validationErrors.common.bothCasesRequired()
+        );
+    });
+    it("shouldn't return error if all cases persists", () => {
+      const { errors } = validate.common("heLLo 123!", bothCaseSettings);
+      Array.isArray(errors) && expect(errors).toBeNull();
+    });
+  });
+  describe("is real email validation", () => {
+    const isEmailSettings: CommonValidationSettings = { isEmail: true };
+    it("return error if email is invalid", () => {
+      const invalidEmails = [
+        "",
+        undefined,
+        "qwer",
+        "qwer@",
+        "qwert@t",
+        "@gmail.com",
+        "gmail.com",
+        "neom@gmail",
+        "ne@gmail.c"
+      ];
+      const output = invalidEmails.every((invalidEmail) => {
+        const { errors } = validate.common(invalidEmail, isEmailSettings);
+        return (
+          Array.isArray(errors) &&
+          errors[0] === validationErrors.common.notEmail()
+        );
+      });
+      expect(output).toBeTruthy()
+    });
+    it("accepts proper email", () => {
+      const { errors } = validate.common(
+        "neomonreo@gmail.com",
+        isEmailSettings
+      );
+      Array.isArray(errors) && expect(errors).toBeNull();
+    });
+  });
   describe("combain settings validation", () => {
     const specialCharactersOnlySettings: CommonValidationSettings = {
       minLength: 3,

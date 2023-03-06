@@ -1,5 +1,4 @@
 const path = require('path');
-const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = ({ development }) => ({
     entry: './src/validate.ts',
@@ -25,6 +24,5 @@ module.exports = ({ development }) => ({
                 use: ['babel-loader', 'ts-loader'],
             },
         ],
-    },
-    plugins: [new ESLintPlugin({ extensions: ['ts'] })]
+    }
 })

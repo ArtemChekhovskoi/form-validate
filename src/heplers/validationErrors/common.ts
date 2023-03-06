@@ -39,6 +39,10 @@ export const commonErrorMessages = () => {
     return "This string must contain both upper and lower cases";
   };
 
+  const notEmail = (): string => {
+    return 'Please, provide correct email'
+  }
+
   return {
     maxLength,
     minLength,
@@ -49,6 +53,7 @@ export const commonErrorMessages = () => {
     containSpecialCharacters,
     lowerCase,
     upperCase,
-    bothCasesRequired
+    bothCasesRequired,
+    notEmail
   };
 };
