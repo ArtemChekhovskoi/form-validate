@@ -1,6 +1,6 @@
 {
   "name": "simple-string-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple library to validate different inputs and strings",
   "main": "dist/validate.js",
   "types": "dist/validate.d.ts",
