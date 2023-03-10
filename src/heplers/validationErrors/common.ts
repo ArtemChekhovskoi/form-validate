@@ -8,7 +8,7 @@ export const commonErrorMessages = () => {
     return `The minimum length must be more then ${value}`;
   };
   const required = (): string => {
-    return "This field is require";
+    return "This field is required";
   };
 
   const lettersOnly = (): string => {
