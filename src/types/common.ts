@@ -10,7 +10,8 @@ export type CommonValidationSettings = {
     containSpecialCharacters?: boolean,
     case?: CaseSettings,
     isEmail?: boolean;
-    
+    isURL?: boolean;
+    errorMessage?: string;
 }
 
 export type ValidationParametersArray<ValidationSettings> = (keyof ValidationSettings) []

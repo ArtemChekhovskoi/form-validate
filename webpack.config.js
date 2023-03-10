@@ -5,7 +5,7 @@ module.exports = ({ development }) => ({
     devtool: development ? 'inline-source-map' : false,
     mode: development ? 'development' : 'production',
     output: {
-        filename: 'validate.ts',
+        filename: 'validate.js',
         path: path.resolve(__dirname, 'dist'),
         library: 'form-validate',
         libraryExport: 'default',

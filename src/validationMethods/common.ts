@@ -13,8 +13,9 @@ import { isNotContainSpecialCharacters } from "./utils/lettersAndNumbers/isNotCo
 import { isNotLettersAndNumbersOnly } from "./utils/lettersAndNumbers/isNotLettersAndNumbersOnly";
 import { isNotLettersOnly } from "./utils/lettersAndNumbers/isNotLettersOnly";
 import { isNotNumbersOnly } from "./utils/lettersAndNumbers/isNotNumbersOnly";
+import { isURL } from "./utils/url/isURL";
 
-export const validateCommonString = (
+export const validateString = (
   value: string | undefined,
   settings: CommonValidationSettings
 ): { errors: string[] | null } => {
@@ -27,63 +28,68 @@ export const validateCommonString = (
       case "maxLength":
         isMoreThenMaxLength(value, settings) &&
           errorsMessages.push(
-            validationErrors.common.maxLength(settings?.maxLength!)
+            validationErrors.string.maxLength(settings?.maxLength!)
           );
         break;
       case "minLength":
         isLessThenMinLength(value, settings) &&
           errorsMessages.push(
-            validationErrors.common.minLength(settings?.minLength!)
+            validationErrors.string.minLength(settings?.minLength!)
           );
         break;
       case "required":
-        !value && errorsMessages.push(validationErrors.common.required());
+        !value && errorsMessages.push(validationErrors.string.required());
         break;
       case "lettersOnly":
         isNotLettersOnly(value) &&
-          errorsMessages.push(validationErrors.common.lettersOnly());
+          errorsMessages.push(validationErrors.string.lettersOnly());
         break;
       case "numbersOnly":
         isNotNumbersOnly(value) &&
-          errorsMessages.push(validationErrors.common.numbersOnly());
+          errorsMessages.push(validationErrors.string.numbersOnly());
         break;
       case "lettersAndNumbersOnly":
         isNotLettersAndNumbersOnly(value) &&
-          errorsMessages.push(validationErrors.common.lettersAndNumbersOnly());
+          errorsMessages.push(validationErrors.string.lettersAndNumbersOnly());
         break;
       case "containSpecialCharacters":
         isNotContainSpecialCharacters(value) &&
           errorsMessages.push(
-            validationErrors.common.containSpecialCharacters()
+            validationErrors.string.containSpecialCharacters()
           );
         break;
       case "case":
         if (settings.case === "upper") {
           isNotOnlyUppercase(value) &&
-            errorsMessages.push(validationErrors.common.upperCase());
+            errorsMessages.push(validationErrors.string.upperCase());
           break;
         }
         if (settings.case === "lower") {
           isNotOnlyLowerCase(value) &&
-            errorsMessages.push(validationErrors.common.lowerCase());
+            errorsMessages.push(validationErrors.string.lowerCase());
           break;
         }
         if (settings.case === "both required") {
           isNotBothCases(value) &&
-            errorsMessages.push(validationErrors.common.bothCasesRequired());
+            errorsMessages.push(validationErrors.string.bothCasesRequired());
           break;
         }
       case "isEmail":
         !isEmail(value) &&
-          errorsMessages.push(validationErrors.common.notEmail());
+          errorsMessages.push(validationErrors.string.notEmail());
         break;
 
+        case 'isURL':
+          !isURL(value) &&
+          errorsMessages.push(validationErrors.string.notURL())
       default:
         return { errors: null };
     }
   });
   if (errorsMessages[0]) {
-    return { errors: errorsMessages };
+    return settings.errorMessage
+      ? { errors: [settings.errorMessage] }
+      : { errors: errorsMessages };
   } else {
     return { errors: null };
   }

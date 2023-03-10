@@ -43,6 +43,10 @@ export const commonErrorMessages = () => {
     return 'Please, provide correct email'
   }
 
+  const notURL = (): string => {
+    return 'Please, provide correct URL'
+  }
+
   return {
     maxLength,
     minLength,
@@ -54,6 +58,7 @@ export const commonErrorMessages = () => {
     lowerCase,
     upperCase,
     bothCasesRequired,
-    notEmail
+    notEmail,
+    notURL,
   };
 };

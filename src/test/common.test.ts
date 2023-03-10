@@ -2,91 +2,91 @@ import { validationErrors } from "../heplers/validationErrors/index";
 import { CommonValidationSettings } from "../types/common";
 import validate from "../validate";
 
-describe("Common validatation", () => {
+describe("string validatation", () => {
   describe("max length validation", () => {
     const maxLengthSettings: CommonValidationSettings = { maxLength: 5 };
     it("return error if string is more then max length", () => {
-      const { errors } = validate.common("qwertyu", maxLengthSettings);
+      const { errors } = validate("qwertyu", maxLengthSettings);
       expect(errors).toBeDefined();
     });
     it("return proper error", () => {
-      const { errors } = validate.common("qwertyu", maxLengthSettings);
+      const { errors } = validate("qwertyu", maxLengthSettings);
       Array.isArray(errors) &&
         expect(errors[0]).toBe(
-          validationErrors.common.maxLength(maxLengthSettings.maxLength!)
+          validationErrors.string.maxLength(maxLengthSettings.maxLength!)
         );
     });
 
     it("shouldn't return error if string is less then max length", () => {
-      const { errors } = validate.common("qwery", maxLengthSettings);
+      const { errors } = validate("qwery", maxLengthSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
   describe("min length validation", () => {
     const minLengthSettings: CommonValidationSettings = { minLength: 3 };
     it("return error if string is less then min length", () => {
-      const { errors } = validate.common("hi", minLengthSettings);
+      const { errors } = validate("hi", minLengthSettings);
       expect(errors).toBeDefined();
     });
     it("return proper error", () => {
-      const { errors } = validate.common("hi", minLengthSettings);
+      const { errors } = validate("hi", minLengthSettings);
       Array.isArray(errors) &&
         expect(errors[0]).toBe(
-          validationErrors.common.minLength(minLengthSettings.minLength!)
+          validationErrors.string.minLength(minLengthSettings.minLength!)
         );
     });
 
     it("shouldn't return error if string is more then min length", () => {
-      const { errors } = validate.common("qwertyu", minLengthSettings);
+      const { errors } = validate("qwertyu", minLengthSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
   describe("required field validation", () => {
     const requiredSettings: CommonValidationSettings = { required: true };
     it("return error if string is null or undefined", () => {
-      const result1 = validate.common("", requiredSettings);
-      const result2 = validate.common(undefined, requiredSettings);
+      const result1 = validate("", requiredSettings);
+      const result2 = validate(undefined, requiredSettings);
       expect(result1.errors).toBeDefined();
       expect(result2.errors).toBeDefined();
     });
     it("return proper error", () => {
-      const { errors } = validate.common("hi", requiredSettings);
+      const { errors } = validate("hi", requiredSettings);
       Array.isArray(errors) &&
-        expect(errors[0]).toBe(validationErrors.common.required());
+        expect(errors[0]).toBe(validationErrors.string.required());
     });
 
     it("shouldn't return error if string is presented", () => {
-      const { errors } = validate.common("qwertyu", requiredSettings);
+      const { errors } = validate("qwertyu", requiredSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
   describe("letters only validation", () => {
     const lettersOnlySettings: CommonValidationSettings = { lettersOnly: true };
     it("return error if numbers or special characters passed", () => {
-      const result1 = validate.common("hello 1", lettersOnlySettings);
-      const result2 = validate.common("hello #", lettersOnlySettings);
+      const result1 = validate("hello 1", lettersOnlySettings);
+      const result2 = validate("hello #", lettersOnlySettings);
       Array.isArray(result1.errors) &&
-        expect(result1.errors[0]).toBe(validationErrors.common.lettersOnly());
+        expect(result1.errors[0]).toBe(validationErrors.string.lettersOnly());
       Array.isArray(result2.errors) &&
-        expect(result2.errors[0]).toBe(validationErrors.common.lettersOnly());
+        expect(result2.errors[0]).toBe(validationErrors.string.lettersOnly());
     });
     it("shouldn't return error if string consist only of letters", () => {
-      const { errors } = validate.common("Hello Here", lettersOnlySettings);
+      const { errors } = validate("Hello Here", lettersOnlySettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
   describe("numbers only validation", () => {
     const numbersOnlySettings: CommonValidationSettings = { numbersOnly: true };
     it("return error if letters or special characters passed", () => {
-      const result1 = validate.common("hello 1", numbersOnlySettings);
-      const result2 = validate.common("1234 #", numbersOnlySettings);
+      const result1 = validate("hello 1", numbersOnlySettings);
+      const result2 = validate("1234 #", numbersOnlySettings);
       Array.isArray(result1.errors) &&
-        expect(result1.errors[0]).toBe(validationErrors.common.numbersOnly());
+        expect(result1.errors[0]).toBe(validationErrors.string.numbersOnly());
       Array.isArray(result2.errors) &&
-        expect(result2.errors[0]).toBe(validationErrors.common.numbersOnly());
+        expect(result2.errors[0]).toBe(validationErrors.string.numbersOnly());
     });
     it("shouldn't return error if string consist only of numbers", () => {
-      const { errors } = validate.common("1234 5", numbersOnlySettings);
+      const { errors } = validate("1234 5", numbersOnlySettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
@@ -95,14 +95,14 @@ describe("Common validatation", () => {
       lettersAndNumbersOnly: true,
     };
     it("return error if special characters passed", () => {
-      const result1 = validate.common("1234 #", lettersAndNumbersOnlySettings);
+      const result1 = validate("1234 #", lettersAndNumbersOnlySettings);
       Array.isArray(result1.errors) &&
         expect(result1.errors[0]).toBe(
-          validationErrors.common.lettersAndNumbersOnly()
+          validationErrors.string.lettersAndNumbersOnly()
         );
     });
     it("shouldn't return error if string consist only of letters and numbers", () => {
-      const { errors } = validate.common(
+      const { errors } = validate(
         "hello 123",
         lettersAndNumbersOnlySettings
       );
@@ -114,17 +114,17 @@ describe("Common validatation", () => {
       containSpecialCharacters: true,
     };
     it("return error if there is no special characters", () => {
-      const result1 = validate.common(
+      const result1 = validate(
         "1234 hello",
         specialCharactersOnlySettings
       );
       Array.isArray(result1.errors) &&
         expect(result1.errors[0]).toBe(
-          validationErrors.common.containSpecialCharacters()
+          validationErrors.string.containSpecialCharacters()
         );
     });
     it("shouldn't return error if string contain special characters", () => {
-      const { errors } = validate.common(
+      const { errors } = validate(
         "hello 123!",
         specialCharactersOnlySettings
       );
@@ -142,32 +142,32 @@ describe("Common validatation", () => {
       case: "both required",
     };
     it("return error if upper case persists", () => {
-      const { errors } = validate.common("qweRt 12f!", lowerCaseSettings);
+      const { errors } = validate("qweRt 12f!", lowerCaseSettings);
       Array.isArray(errors) &&
-        expect(errors).toBe(validationErrors.common.lowerCase());
+        expect(errors).toBe(validationErrors.string.lowerCase());
     });
     it("shouldn't return error if there's only lower case", () => {
-      const { errors } = validate.common("hello 1!", lowerCaseSettings);
+      const { errors } = validate("hello 1!", lowerCaseSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
     it("return error if lower case persists", () => {
-      const result1 = validate.common("QWErT", upperCaseSettings);
+      const result1 = validate("QWErT", upperCaseSettings);
       Array.isArray(result1.errors) &&
-        expect(result1.errors[0]).toBe(validationErrors.common.upperCase());
+        expect(result1.errors[0]).toBe(validationErrors.string.upperCase());
     });
     it("shouldn't return error if there's only upper case", () => {
-      const { errors } = validate.common("QWERT", upperCaseSettings);
+      const { errors } = validate("QWERT", upperCaseSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
     it("return error if not both cases persists", () => {
-      const result1 = validate.common("qwet", bothCaseSettings);
+      const result1 = validate("qwet", bothCaseSettings);
       Array.isArray(result1.errors) &&
         expect(result1.errors[0]).toBe(
-          validationErrors.common.bothCasesRequired()
+          validationErrors.string.bothCasesRequired()
         );
     });
     it("shouldn't return error if all cases persists", () => {
-      const { errors } = validate.common("heLLo 123!", bothCaseSettings);
+      const { errors } = validate("heLLo 123!", bothCaseSettings);
       Array.isArray(errors) && expect(errors).toBeNull();
     });
   });
@@ -183,23 +183,61 @@ describe("Common validatation", () => {
         "@gmail.com",
         "gmail.com",
         "neom@gmail",
-        "ne@gmail.c"
+        "ne@gmail.c",
       ];
       const output = invalidEmails.every((invalidEmail) => {
-        const { errors } = validate.common(invalidEmail, isEmailSettings);
+        const { errors } = validate(invalidEmail, isEmailSettings);
         return (
           Array.isArray(errors) &&
-          errors[0] === validationErrors.common.notEmail()
+          errors[0] === validationErrors.string.notEmail()
         );
       });
-      expect(output).toBeTruthy()
+      expect(output).toBeTruthy();
     });
     it("accepts proper email", () => {
-      const { errors } = validate.common(
+      const { errors } = validate(
         "neomonreo@gmail.com",
         isEmailSettings
       );
       Array.isArray(errors) && expect(errors).toBeNull();
+    });
+  });
+  describe("validates URL", () => {
+    const isURLsettings: CommonValidationSettings = {
+      isURL: true
+    };
+    it("returns error", () => {
+    const invalidURLs = [
+      "hello",
+      "hello.com",
+      "try.hello.com",
+      "ru.ru.ru",
+      "http://",
+    ]
+    const output = invalidURLs.every((invalidURL) => {
+      const { errors } = validate(invalidURL, isURLsettings);
+      return (
+        Array.isArray(errors) &&
+        errors[0] === validationErrors.string.notURL()
+      );
+    });
+      expect(output).toBeTruthy()
+    });
+    it("doesn't return error on proper URL", () => {
+      const { errors } = validate("https://google.com", isURLsettings);
+      Array.isArray(errors) &&
+        expect(errors).toBeNull();
+    });
+  });
+  describe("returns custom error message", () => {
+    const settings: CommonValidationSettings = {
+      minLength: 3,
+      errorMessage: "This is custom error message",
+      containSpecialCharacters: true,
+    };
+    it("returns error", () => {
+      const { errors } = validate("hello", settings);
+      Array.isArray(errors) && expect(errors).toBe(settings.errorMessage);
     });
   });
   describe("combain settings validation", () => {

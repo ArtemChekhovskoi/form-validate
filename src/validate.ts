@@ -1,20 +1,12 @@
 import {
   CommonValidationSettings,
 } from "./types/common";
-import { validateCommonString } from "./validationMethods/common";
+import { validateString } from "./validationMethods/common";
 
-class Validate {
-  common(
-    value: string | undefined,
-    settings: CommonValidationSettings
-  ): { errors: string[] | null } {
-    return validateCommonString(value, settings);
-  }
-  email() {}
+const validate = (value: string | undefined,
+    settings: CommonValidationSettings) : { errors: string[] | null } => {
 
-  password() {}
+    return validateString(value, settings);
 }
-
-const validate = new Validate();
 
 export default validate;
