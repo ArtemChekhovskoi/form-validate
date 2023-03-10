@@ -38,7 +38,7 @@ yarn add form-validator
 
 ### React:
 
-`
+```shell
 import React, { useState } from 'react';
 import validate from 'simple-string-validator';
 
@@ -71,7 +71,7 @@ function InputValidation() {
 }
 
 export default InputValidation;
-`
+```
 
 
 You could get all the validation errors from the "errors" array. If there's no errors, this array will be empty.
