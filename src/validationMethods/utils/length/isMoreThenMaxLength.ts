@@ -4,7 +4,7 @@ export const isMoreThenMaxLength = (
   value: string | undefined,
   settings: CommonValidationSettings
 ) => {
-  if (value && value.length > settings?.maxLength!) {
+  if (value && value.length >= settings?.maxLength!) {
     return true;
   } else return false;
 };
