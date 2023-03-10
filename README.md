@@ -38,6 +38,41 @@ yarn add form-validator
 
 ### React:
 
+`
+import React, { useState } from 'react';
+import validate from 'simple-string-validator';
+
+function InputValidation() {
+  const [email, setEmail] = useState('');
+  const [emailErrors, setEmailErrors] = useState<string[] | null>();
+
+  const submitForm = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setEmailErrors(null);
+    const { errors } = validate(email, { isEmail: true, required: true });
+    if (errors) {
+      setEmailErrors(errors);
+      return;
+    }
+    //submit form logic
+  };
+
+  return (
+    <form onSubmit={submitForm}>
+      <h1>Enter your email to subscribe.</h1>
+      <input value={email} onChange={(e) => setEmail(e.target.value)} />
+      {emailErrors &&
+        emailErrors.map((error) => {
+          return <p>{error}</p>;
+        })}
+      <button>Submit</button>
+    </form>
+  );
+}
+
+export default InputValidation;
+`
+
 
 You could get all the validation errors from the "errors" array. If there's no errors, this array will be empty.
 
