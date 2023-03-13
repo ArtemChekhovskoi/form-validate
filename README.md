@@ -114,4 +114,3 @@ ISC Licensed. Artem Chekhvskoi, 2023.
 
 ### Keywords
 [validate](https://www.npmjs.com/search?q=keywords:validate) [form](https://www.npmjs.com/search?q=keywords:form) [inputs](https://www.npmjs.com/search?q=keywords:inputs) [string](https://www.npmjs.com/search?q=keywords:string) [validation](https://www.npmjs.com/search?q=keywords:validation) [validator](https://www.npmjs.com/search?q=keywords:validator) [password](https://www.npmjs.com/search?q=keywords:password) [email](https://www.npmjs.com/search?q=keywords:email)
-````
