@@ -96,13 +96,13 @@ You could also provide your custom error message (see accepted parameters below)
 
 **Custom error messages example**:
 
-````shell
+```shell
 const { errors } = validate(email, {
       isEmail: true,
       required: true,
-      errorMessage: 'Please, provide correct email',
-    });
-    ```
+      errorMessage: 'Please, provide correct email'
+    })
+```
 
 ## Typescript
 This library has full Typescript support.
