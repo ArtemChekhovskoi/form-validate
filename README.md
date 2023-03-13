@@ -25,13 +25,13 @@ Features:
 For start using:
 
 ```shell
-npm i form-validator
+npm i simple-string-validator
 ```
 
 or
 
 ```shell
-yarn add form-validator
+yarn add simple-string-validator
 ```
 
 ## Usage example
