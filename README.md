@@ -14,7 +14,6 @@ Features:
 
 - [Quick start](#quick-start)
 - [Usage example](#usage-example)
-  - [Vanilla JS](#vanilla-js)
   - [React](#react)
 - [Settings](#settings)
 - [Typescript](#typescript)
