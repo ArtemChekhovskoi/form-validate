@@ -1,8 +1,9 @@
 # Easy input validation with form validator
-  
-This library will help you validate any strings (emails, passwords, URLs, etc) and show an error if the validation fails. 
+
+This library will help you validate any strings (emails, passwords, URLs, etc) and show an error if the validation fails.
 
 Features:
+
 - Small size.
 - No extra npm dependecies.
 - Typescript support.
@@ -10,6 +11,7 @@ Features:
 - Support all platforms.
 
 ## Table of contents
+
 - [Quick start](#quick-start)
 - [Usage example](#usage-example)
   - [Vanilla JS](#vanilla-js)
@@ -21,20 +23,19 @@ Features:
 
 ## Quick start
 
-
-
 For start using:
+
 ```shell
 npm i form-validator
 ```
+
 or
+
 ```shell
 yarn add form-validator
 ```
 
 ## Usage example
-
-### Vanilla JS:
 
 ### React:
 
@@ -73,27 +74,35 @@ function InputValidation() {
 export default InputValidation;
 ```
 
-
-You could get all the validation errors from the "errors" array. If there's no errors, this array will be empty.
+You could get all the validation errors from the "errors" array.
 
 You could also provide your custom error message (see accepted parameters below).
 
 ## Settings
-| Parameter | Type | Description |
-|-|--|--|
-| maxLength | number | Sets the maximum allowed string length. |
-| minLength | number | Sets the minimum allowed string length. |
-| required | boolean | Indicates whether this string is required |
-| numbersOnly | boolean | A flag that indicates that only numbers should be contained in the string. |
-| lettersOnly | boolean |  A flag that indicates that only letters should be contained in the string. |
-| lettersAndNumbersOnly | boolean | A flag that indicates that only numbers and letters should be contained in the string. Special characters are not allowed. |
-| case | "lower", "upper", "both required" |  Sets the case in which the string should be |
-| containSpecialCharacters | boolean | Indicates that the string must contain special characters. |
-| isEmail | boolean | Checks if a string is an email |
-| isURL | boolean | Checks if a string is an URL |
-| errorMessage | string | Allows you to set a custom error message that will be displayed if the string fails validation. |
+
+| Parameter                | Type                              | Description                                                                                                                |
+| ------------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| maxLength                | number                            | Sets the maximum allowed string length.                                                                                    |
+| minLength                | number                            | Sets the minimum allowed string length.                                                                                    |
+| required                 | boolean                           | Indicates whether this string is required                                                                                  |
+| numbersOnly              | boolean                           | A flag that indicates that only numbers should be contained in the string.                                                 |
+| lettersOnly              | boolean                           | A flag that indicates that only letters should be contained in the string.                                                 |
+| lettersAndNumbersOnly    | boolean                           | A flag that indicates that only numbers and letters should be contained in the string. Special characters are not allowed. |
+| case                     | "lower", "upper", "both required" | Sets the case in which the string should be                                                                                |
+| containSpecialCharacters | boolean                           | Indicates that the string must contain special characters.                                                                 |
+| isEmail                  | boolean                           | Checks if a string is an email                                                                                             |
+| isURL                    | boolean                           | Checks if a string is an URL                                                                                               |
+| errorMessage             | string                            | Allows you to set a custom error message that will be displayed if the string fails validation.                            |
 
 **Custom error messages example**:
+
+````shell
+const { errors } = validate(email, {
+      isEmail: true,
+      required: true,
+      errorMessage: 'Please, provide correct email',
+    });
+    ```
 
 ## Typescript
 This library has full Typescript support.
@@ -106,3 +115,4 @@ ISC Licensed. Artem Chekhvskoi, 2023.
 
 ### Keywords
 [validate](https://www.npmjs.com/search?q=keywords:validate) [form](https://www.npmjs.com/search?q=keywords:form) [inputs](https://www.npmjs.com/search?q=keywords:inputs) [string](https://www.npmjs.com/search?q=keywords:string) [validation](https://www.npmjs.com/search?q=keywords:validation) [validator](https://www.npmjs.com/search?q=keywords:validator) [password](https://www.npmjs.com/search?q=keywords:password) [email](https://www.npmjs.com/search?q=keywords:email)
+````
