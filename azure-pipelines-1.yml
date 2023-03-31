@@ -27,6 +27,13 @@ steps:
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
+- task: CopyFiles@2
+  displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: './package.json'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
