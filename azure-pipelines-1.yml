@@ -19,3 +19,19 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+
+- task: PublishSymbols@2
+  displayName: 'Publish symbols path'
+  inputs:
+    SearchPattern: '**\dist\**'
+    PublishSymbols: false
+  continueOnError: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)\src\Ndex.CustomItem.Explorer'
+    Contents: '**\dist\**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
