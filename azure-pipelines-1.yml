@@ -31,7 +31,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
   inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)\src\Ndex.CustomItem.Explorer'
+    SourceFolder: '$(system.defaultworkingdirectory)\dist\**'
     Contents: '**\dist\**'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
