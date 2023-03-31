@@ -27,10 +27,8 @@ steps:
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
-
-- task: PublishSymbols@2
-  displayName: 'Publish symbols path'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
   inputs:
-    SearchPattern: '**\dist\**'
-    PublishSymbols: false
-  continueOnError: true
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'www'
