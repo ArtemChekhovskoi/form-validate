@@ -28,14 +28,13 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 - task: CopyFiles@2
-  displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
+  displayName: 'Copy Files package json'
   inputs:
-    SourceFolder: './package.json'
-    Contents: '**'
+    SourceFolder: 'package.json'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
-    ArtifactName: 'www'
+    ArtifactName: 'dist'
