@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  name: build_machine
 
 steps:
 - task: NodeTool@0
