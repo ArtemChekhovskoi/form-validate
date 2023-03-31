@@ -20,6 +20,13 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
+  inputs:
+    SourceFolder: './dist'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
 - task: PublishSymbols@2
   displayName: 'Publish symbols path'
@@ -27,11 +34,3 @@ steps:
     SearchPattern: '**\dist\**'
     PublishSymbols: false
   continueOnError: true
-
-- task: CopyFiles@2
-  displayName: 'Copy Files from: $(system.defaultworkingdirectory) to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)\dist\**'
-    Contents: '**\dist\**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
